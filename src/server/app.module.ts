@@ -4,6 +4,9 @@ import Next from 'next';
 import { NODE_ENV } from 'src/shared/constants/env';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { PrismaService } from './database/prisma.service';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
 
 @Module({
   /* should pass a NEXT.js server instance
@@ -13,7 +16,7 @@ import { AppService } from './app.service';
       viewsDir: null,
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UserController],
+  providers: [AppService, UserService, PrismaService],
 })
 export class AppModule {}

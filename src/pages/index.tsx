@@ -6,14 +6,21 @@ import { fetch } from 'src/shared/utils/fetch';
 
 export const getServerSideProps: GetServerSideProps<THomeProps> = async () => {
   const blogPosts = await fetch('/api/blog-posts');
-  return { props: { blogPosts } };
+  const users = await fetch('/api/users');
+  return { props: { blogPosts, users } };
 };
+interface User {
+  id: number;
+  name: string;
+  nickName: string;
+}
 
 type THomeProps = {
   blogPosts: BlogPost[];
+  users: User[];
 };
 
-const Home: FC<THomeProps> = ({ blogPosts = [] }) => {
+const Home: FC<THomeProps> = ({ blogPosts = [], users = [] }) => {
   return (
     <div>
       <h1>Home</h1>
